@@ -1,0 +1,68 @@
+Unity Remote - android
+
+(0)
+setup Andrond SKD path??
+
+
+(1)
+download Unite Remote onto mobile phone
+
+(2)
+Edit | Project Settings | Editor
+
+in Inspector change Device from None to Any Android device
+
+(3)
+save project and close unity
+
+(4)
+connect USB cable between device and computer
+
+(4)
+restart Unity
+
+(5)
+run project
+
+(6)
+project should run on the connected phone
+
+
+======
+
+Unity Remote - MAc
+
+=====
+
+Build for Android
+
+(1)
+Java
+e.g. from Oracle
+http://www.oracle.com/technetwork/java/javase
+
+(2)
+Android SKD
+e.g. from
+https://developer.android.com/studio/ <<<< insalled but Unity still can't find SDK ...
+
+open Android Studio
+
+
+/*
+follow steps here:
+https://www.androidcentral.com/installing-android-sdk-windows-mac-and-linux-tutorial
+
+get the COMMAND LINE TOOLS ZIP - 
+unzip to 
+*/
+
+(3)
+ensure Android build target component installed for UNity - if not add it
+
+(4)
+add developer URL
+
+e.g.
+com.mattsmithdev.menu1
+

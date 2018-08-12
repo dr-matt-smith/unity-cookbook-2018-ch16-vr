@@ -1,0 +1,20 @@
+Unity Samples UI (includes drag and drop)
+https://www.assetstore.unity3d.com/en/#!/content/25468
+
+
+Unity UI Extensions
+https://bitbucket.org/UnityUIExtensions/unity-ui-extensions
+Simon (Darkside) Jackson
+
+
+====
+Nice Drag-Drop tutorial - by Christian Oeing
+http://unity-coding.slashgames.org/extend-unitys-eventsystem-drag-drop/
+
+(A) change color when something dragged over me
+
+1. Text to drag
+- new UI Text
+- add DragOperationHandler script
+- add PullBehaviour script
+- add DragHandler script
