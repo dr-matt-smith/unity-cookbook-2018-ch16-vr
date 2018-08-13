@@ -2,12 +2,12 @@
 
 In this chapter, we will cover:
 
-1. Pausing the game
-2. Implementing slow motion
-3. Destroying objects at death a time
-4. Gizmo to show selected object in Scene panel
-5. Gizmo to display icon for object type
-6. Gizmo to draw a grid in the Scene panel
+1. UI Slider to change game quality settings
+2. Pausing the game
+3. Implementing slow motion
+
+4. Gizmo to show currently selected object in Scene panel
+5. Gizmo to draw a grid in the Scene panel
 
 5. Optimization with the Unity Profiler
 6. Particles
@@ -108,7 +108,7 @@ Perhaps, the core strategy to take away from this chapter is that there are many
 <!-- ******************************* -->
 <!-- ******************************* -->
 
-# Player UI to changing the game's quality settings
+# UI Slider to change game quality settings
 
 In this recipe we show how the player can control the quality settings by providing UI Slider and reading the array of possible settings.
 
@@ -501,80 +501,6 @@ Motion Blur is an image effect frequently identified with slow motion. Once atta
 Max Payne famously used a strong, heavy heartbeat sound as sonic ambience. You could also try lowering the sound effects volume to convey the character focus when in slow motion. Plus, using audio filters on the camera could be an interesting option.
 
 
-<!-- ******************************* -->
-<!-- ******************************* -->
-<!-- ******** new recipe ********** -->
-<!-- ******************************* -->
-<!-- ******************************* -->
-
-# Destroying objects at death a time
-
-Optimization principal 1: Minimize the number of active and enabled objects in a scene.
-
-One way to reduce the number of active objects is to destroy objects when they are no longer needed. As soon as an object is no longer needed, we should destroy it; this saves both memory and processing resources since Unity no longer needs to send the object such messages as Update() and FixedUpdate(), or consider object collisions or physics and  so on.
-
-However, there may be times when we wish not to destroy an object immediately, but at some known point in the future. Examples might include after a sound has finished playing (see that recipe Waiting for audio to finish before auto-destructing object in Chapter 9, Playing and Manipulating Sounds), the player only has a certain time to collect a bonus object before it disappears, or perhaps an object displaying a message to the player should disappear after  a certain time.
-
-This recipe demonstrates how objects can be told to start dying, and then to automatically destroy them after a given delay has passed.
-
-
-<!-- ******************************* -->
-<!-- ******************************* -->
-
-## How to do it... 
-
-To destroy objects after a specified time, follow these steps:
-
-1. Create a new 2D project.
-
-1. Create a UI Button named Click Me, and make it stretch to fill the entire window.
-
-1. In the Inspector, set the Button's Text child to have left-aligned and large text.
-
-1. Add the following script class DeathTimeExample.cs to Button Click Me:
-
-    ```csharp
-        using UnityEngine;
-        using System.Collections;
-        using UnityEngine.UI;
-        
-        public class DeathTimeExample : MonoBehaviour {
-          public void BUTTON_ACTION_StartDying() {
-            deathTime = Time.time + deathDelay;
-          }
-        
-          public float deathDelay = 4f;
-          private float deathTime = -1;
-        
-          public Text buttonText;
-        
-          void Update(){
-            if(deathTime > 0){
-              UpdateTimeDisplay();
-              CheckDeath();
-            }
-          }
-        
-          private void UpdateTimeDisplay(){
-            float timeLeft = deathTime - Time.time;
-            string timeMessage = "time left: " + timeLeft;
-            buttonText.text = timeMessage;
-          }
-        
-          private void CheckDeath(){
-            if(Time.time > deathTime) Destroy( gameObject );
-          }
-        }
-    ```
-
-1. Drag the Text child of Button Click Me into the script's public variable Button Text, so this script is able to 
-change the button text to show the countdown.
-
-1. With Button Click Me selected in the Hierarchy, add a new On Click() event for this button, dragging the button itself as the target GameObject and selecting public function BUTTON_ACTION_StartDying(),as shown in the following screenshot:
-
-1. Now, run the scene; once the button is clicked, the button's text should show the countdown. Once the countdown gets to zero, Button Click Me will be destroyed 
- (including all its children, in this case, just the GameObject Text).
-
 
 
 <!-- ******************************** -->
@@ -582,14 +508,283 @@ change the button text to show the countdown.
 
 ## How it works...
 
-The float variable deathDelay stores the number of seconds the object waits before destroying itself once the decision has been made for the object to start dying. The float variable deathTime either has a value of -1 (no death time yet set) or it is a non-negative  value, which is the time we wish the object to destroy itself.
+xx
 
-When the button is clicked, the BUTTON_ACTION_StartDying() method is called. This method sets this deathTime variable to the current time plus whatever value is set in deathDelay. This new value for deathTime will be a positive number, meaning the  IF-statement in the Update() method will fire from this point onward.
 
-Every frame method Update() checks if deathTime is greater than zero (that is, a death time has been set), and, if so, it then calls, the UpdateTimeDisplay() and CheckDeath() methods.
+<!-- ******************************* -->
+<!-- ******************************* -->
+<!-- ******** new recipe ********** -->
+<!-- ******************************* -->
+<!-- ******************************* -->
 
-The UpdateTimeDisplay() methods creates a string message stating how many seconds are left and updates the Button Text to show this message.
+# Gizmo to show currently selected object in Scene panel
 
-The CheckDeath() method tests whether the current time has passed the deathTime. If the death time has passed, then the parent gameObject is immediately destroyed.
+Gizmos are provide visual aids to game designers in the Scene panel. In this recipe we'll highlight clearly in the Scene panel, the GameObject that is currently selected in the Hierarchy.
 
-When you run the scene, you'll see the Button removed from the Hierarchy once its death time has been reached.
+![Insert Image B08775_16_08.png](./16_figures/B08775_16_08.png)
+
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+## How to do it... 
+
+To create a Gizmo to show the selected object in Scene panel, follow these steps:
+
+1. Create a new 3D project.
+
+1. Create a 3D Cube, choosing menu: Create | 3D Object | Cube.
+
+1. Create C# script-class GizmoHighlightSelected, and add an instance-object as a component to the 3D Cube:
+
+    ```csharp
+        using UnityEngine;
+        
+        public class GizmoHighlightSelected : MonoBehaviour {
+        	public float radius = 5.0f;
+                
+        	void OnDrawGizmosSelected() {
+        		Gizmos.color = Color.red;
+        		Gizmos.DrawWireSphere(transform.position, radius);
+        
+        		Gizmos.color = Color.yellow;
+        		Gizmos.DrawWireSphere(transform.position, radius - 0.1f);
+        
+        		Gizmos.color = Color.green;
+        		Gizmos.DrawWireSphere(transform.position, radius - 0.2f);
+        	}
+        }
+    ```
+
+1. Make lots of duplicates of the 3D Cube, distributing them randomly around the Scene.
+
+1. When you select one Cube in the Hierarchy, you should see 3 colored wireframe spheres drawn around the selected 
+GameObject in the Scene panel.
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## How it works...
+
+When an object is selected in Scene, if it contains a scripted component that has a method OnDrawGizmosSelected(), 
+then that method is invoked. Our method draws 3, concentric wireframe spheres in three different colors around the 
+selected object.
+
+
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+<!-- ******** new recipe ********** -->
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+# Gizmo to draw a grid in the Scene panel
+
+If the positioning of objects needs to be restricted to specific increments, it is useful to have a grid draw in the 
+Scene panel to help ensure new objects are positioned based on those values.\
+
+In this recipe we use Gizmos to draw a grid 2 x 2 Unit units.
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+## How to do it... 
+
+To create a Gizmo to show the selected object in Scene panel, follow these steps:
+
+1. Create a new 3D project.
+
+1. For the Scene panel, turn off the Skybox view (or simple toggle off all the visual settings), so you have a plain background for your grid work.
+
+    ![Insert Image B08775_16_09.png](./16_figures/B08775_16_09.png)
+
+1. The display, and updating of child objects will be performed by a script-class GridGizmo. Create a new C# script-class named GridGizmo containing the following:
+
+    ```csharp
+        using System.Collections;
+        using System.Collections.Generic;
+        using UnityEngine;
+        
+        public class GridGizmo : MonoBehaviour {
+        	[SerializeField]
+            public int grid = 2;
+        
+        	public void SetGrid(int grid) {
+        		this.grid = grid;
+        		SnapAllChildren();
+        	}
+        
+        	[SerializeField]
+        	public Color gridColor = Color.red;
+        
+        	[SerializeField]
+            public int numLines = 6;
+        
+        	[SerializeField]
+            public int lineLength = 50;
+        
+        	private void SnapAllChildren() {
+        		foreach (Transform child in transform)
+                    SnapPositionToGrid(child);
+        	}
+        
+        	void OnDrawGizmos() {
+        		Gizmos.color = gridColor;
+        
+        		int min = -lineLength;
+        		int max = lineLength;
+        
+        		int n = -1 * RoundForGrid(numLines / 2);
+        		for (int i = 0; i < numLines; i++) {
+        			Vector3 start = new Vector3(min, n, 0);
+        			Vector3 end = new Vector3(max, n, 0); 
+        			Gizmos.DrawLine(start, end);
+        
+        			start = new Vector3(n, min, 0);
+        			end = new Vector3(n, max, 0); 
+        			Gizmos.DrawLine(start, end);
+        
+        			n += grid;
+        		}
+        	}
+        
+        	public int RoundForGrid(int n) {
+        		return (n/ grid) * grid;
+        	}
+        	
+        	public int RoundForGrid(float n) {
+        		int posInt = (int) (n / grid);
+        		return posInt * grid;
+        	}
+        	
+        	public void SnapPositionToGrid(Transform transform) {
+        		transform.position = new Vector3 (
+        			RoundForGrid(transform.position.x),
+        			RoundForGrid(transform.position.y),
+        			RoundForGrid(transform.position.z)
+        		);
+        	}
+        }
+    ```
+
+1. Let's use an Editor script to add a new menu item to the GameObject menu. Create a folder named Editor, and in that folder create a new C# script-class named EditorGridGizmoMenuItem containing the following:
+   
+    ```csharp
+        using UnityEngine;
+        using UnityEditor;
+        using System.Collections;
+        
+        public class EditorGridGizmoMenuItem : Editor {
+        	[MenuItem("GameObject/Create New Snapgrid", false, 10000)]
+        	static void CreateCustomEmptyGameObject(MenuCommand menuCommand) {
+        		GameObject gameObject = new GameObject("___snap-to-grid___");
+        		
+        		gameObject.transform.parent = null;
+        		gameObject.transform.position = Vector3.zero;
+        		gameObject.AddComponent<GridGizmo>();        
+        	}
+        }
+    ```
+
+1. Let's now add another Editor script, for a custom Inspector display (and updater) for GridGizmo components. Also in your Editor folder create a new C# script-class named EditorGridGizmo containing the following:
+   
+   ```csharp
+        using UnityEngine;
+        using UnityEditor;
+        using System.Collections;
+        
+        [CustomEditor(typeof(GridGizmo))]
+        public class EditorGridGizmo : Editor {
+        	private GridGizmo gridGizmoObject;
+        	private int grid;
+        	private Color gridColor;
+        	private int numLines;
+        	private int lineLength;
+        	
+        	private string[] gridSizes = {
+        		"1", "2", "3", "4", "5"
+        	};
+        	
+        	void OnEnable() {
+        		gridGizmoObject = (GridGizmo)target;
+        		grid = serializedObject.FindProperty("grid").intValue;
+        		gridColor = serializedObject.FindProperty("gridColor").colorValue;
+        		numLines = serializedObject.FindProperty("numLines").intValue;
+        		lineLength = serializedObject.FindProperty("lineLength").intValue;
+        	}
+        		
+        	public override void OnInspectorGUI() {
+        		serializedObject.Update ();
+        		
+        		int gridIndex = grid - 1;
+        		gridIndex =  EditorGUILayout.Popup("Grid size:",  gridIndex, gridSizes);        		
+        		gridColor = EditorGUILayout.ColorField("Color:", gridColor);
+        		numLines =  EditorGUILayout.IntField("Number of grid lines",  numLines);
+        		lineLength =  EditorGUILayout.IntField("Length of grid lines",  lineLength);
+        
+        		grid = gridIndex + 1;
+        		gridGizmoObject.SetGrid(grid);	
+        		gridGizmoObject.gridColor = gridColor;
+        		gridGizmoObject.numLines = numLines;	
+        		gridGizmoObject.lineLength = lineLength;	
+        		serializedObject.ApplyModifiedProperties ();
+        		SceneView.RepaintAll();
+        	}        
+        }
+   ```
+
+1. Add a new GizmoGrid GameObject to the Scene, by choosing menu: GameObject | Create New Snapgrid. A new GameObject named ___snap-to-grid___ should be added to the Hierarchy.
+
+    ![Insert Image B08775_16_10.png](./16_figures/B08775_16_10.png)
+
+1. Select GameObject ___snap-to-grid___, and modify some of its properties in the Inspector. You can change the grid size, the color of the grid lines, the number of lines and their length:
+
+    ![Insert Image B08775_16_11.png](./16_figures/B08775_16_11.png)
+ 
+
+1. Create a 3D Cube, choosing menu: Create | 3D Object | Cube. Now drag the 3D Cube in the Hierarchy and child it to 
+GameObject ___snap-to-grid___.
+
+
+
+1. We now need a small script-class so that each time the GameObject is moved (in Editor mode) it asks for its position to be snapped by the parent scriped component SnapToGizmoGrid. Create C# script-class SnapToGizmoGrid, and add an instance-object as a component to the 3D Cube:
+
+    ```csharp
+        using System.Collections;
+        using System.Collections.Generic;
+        using UnityEngine;
+        
+        [ExecuteInEditMode]
+        public class SnapToGridGizmo : MonoBehaviour {
+            public void Update()
+            {
+        #if UNITY_EDITOR
+                transform.parent.GetComponent<GridGizmo>().SnapPositionToGrid(transform);
+        #endif
+            }
+            
+        }
+    ```
+
+1. Make lots of duplicates of the 3D Cube, distributing them randomly around the Scene - you'll find they snap to the
+ grid.
+
+1. Select GameObject ___snap-to-grid___ again, and modify some of its properties in the Inspector. You'll see that 
+the changes are instantly visible in the Scene, and that all child objects that have a scripted component of 
+SnapToGizmoGrid are snapped to any new grid size changes.
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## How it works...
+
+Script-class EditorGridGizmoMenuItem adds a new item to the GameObject menu. When selected a new GameObject is added to the Hierarchy named  ___snap-to-grid___, positioned at (0,0,0) and containing an instance-object component of script-class GridGizmo.
+
+Script-class GridGizmo draws a 2D grid based on public properties for grid size, color, number if lines and line length. Also, method SetGrid(...), as well as updating integer grid size variable grid, also invokes method SnapAllChildren(), so that each time the grid size is changed, all child GameObjects are snapped into the new grid positions.
+
+Script-class SnapToGridGizmo includes Editor attribute `[ExecuteInEditMode]`, so that it will received Update() messages when its properties are changed at Design-Time in the Editor. Each time Update() is invoked, it calls method SnapPositionToGrid(...) in its parent GridGizmo instance-object, so that its position is snapped based on the current settings of the grid. To ensure this logic and code is not compiled into any final Build of the game, the contents of Update() are wrapped in an `#if UNITY_EDITOR` compiler test. Such content is removed before a build is compiled for the final game.
+
+Script-class EditorGridGizmo is a custom Editor Inspector component. This allows for both control of which properties are displayed in the Inspector, how they are displayed, and it allows actions to be performed when any values are changed. So, for example, after chanfges have been saved statement `SceneView.RepaintAll()` ensures the grid is redisplayed, since it results int an OnDrawGizmos() message being sent.
+
