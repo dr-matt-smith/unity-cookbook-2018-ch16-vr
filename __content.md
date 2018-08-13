@@ -7,7 +7,7 @@ In this chapter, we will cover:
 3. Implementing slow motion
 
 4. Gizmo to show currently selected object in Scene panel
-5. Gizmo to draw a grid in the Scene panel
+5. Editor snap-to grid drawn by Gizmo
 
 5. Optimization with the Unity Profiler
 6. Particles
@@ -437,6 +437,9 @@ GameObject:
     
     - Height: 50
     
+    ![Insert Image B08775_16_13.png](./16_figures/B08775_16_13.png)
+
+    
 1. In the Inspector, set as inactive the sliders child GameObject Handle Slide Area.
 
     ![Insert Image B08775_16_07.png](./16_figures/B08775_16_07.png)
@@ -579,12 +582,14 @@ selected object.
 <!-- ******************************* -->
 <!-- ******************************* -->
 
-# Gizmo to draw a grid in the Scene panel
+# Editor snap-to grid drawn by Gizmo
 
-If the positioning of objects needs to be restricted to specific increments, it is useful to have a grid draw in the 
-Scene panel to help ensure new objects are positioned based on those values.\
+If the positioning of objects needs to be restricted to specific increments, it is useful to have a grid drawn in the Scene panel to help ensure new objects are positioned based on those values, and also code to snap objects to that grid.
 
-In this recipe we use Gizmos to draw a grid 2 x 2 Unit units.
+In this recipe we use Gizmos to draw a grid, with customizable grid size, color, number of lines and line lenght.
+
+![Insert Image B08775_16_12.png](./16_figures/B08775_16_12.png)
+
 
 <!-- ******************************* -->
 <!-- ******************************* -->
@@ -689,7 +694,7 @@ To create a Gizmo to show the selected object in Scene panel, follow these steps
 
 1. Let's now add another Editor script, for a custom Inspector display (and updater) for GridGizmo components. Also in your Editor folder create a new C# script-class named EditorGridGizmo containing the following:
    
-   ```csharp
+    ```csharp
         using UnityEngine;
         using UnityEditor;
         using System.Collections;
@@ -732,7 +737,7 @@ To create a Gizmo to show the selected object in Scene panel, follow these steps
         		SceneView.RepaintAll();
         	}        
         }
-   ```
+    ```
 
 1. Add a new GizmoGrid GameObject to the Scene, by choosing menu: GameObject | Create New Snapgrid. A new GameObject named ___snap-to-grid___ should be added to the Hierarchy.
 
