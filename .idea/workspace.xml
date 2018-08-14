@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c917a024-cc72-460c-920b-b1f78e168443" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_23.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_23.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_24.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_24.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_26.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_26.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_27.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_27.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_28.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_28.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_29.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_29.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_30.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_30.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_31.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_31.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/16_figures/B08775_16_32.png" afterPath="$PROJECT_DIR$/16_figures/B08775_16_32.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__OUTPUT/_CHAPTER_16.pdf" afterPath="$PROJECT_DIR$/__OUTPUT/_CHAPTER_16.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__content.md" afterPath="$PROJECT_DIR$/__content.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +26,8 @@
         <entry file="file://$PROJECT_DIR$/__content.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="555">
-                <caret line="1164" column="0" lean-forward="false" selection-start-line="1164" selection-start-column="0" selection-end-line="1164" selection-end-column="0" />
+              <first_editor relative-caret-position="126">
+                <caret line="1024" column="0" lean-forward="false" selection-start-line="1024" selection-start-column="0" selection-end-line="1024" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -116,8 +108,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1200" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -157,20 +149,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="__OUTPUT" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unity-cookbook-2018-ch16-vr" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="unity-cookbook-2018-ch16-vr" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="16_figures" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -268,24 +246,24 @@
       <workItem from="1534006645906" duration="979000" />
       <workItem from="1534007863191" duration="1572000" />
       <workItem from="1534076198276" duration="9120000" />
-      <workItem from="1534155966500" duration="18687000" />
+      <workItem from="1534155966500" duration="19580000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30358000" />
+    <option name="totallyTimeSpent" value="31251000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15495208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14377682" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42910448" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -617,8 +595,8 @@
     <entry file="file://$PROJECT_DIR$/__content.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="555">
-            <caret line="1164" column="0" lean-forward="false" selection-start-line="1164" selection-start-column="0" selection-end-line="1164" selection-end-column="0" />
+          <first_editor relative-caret-position="126">
+            <caret line="1024" column="0" lean-forward="false" selection-start-line="1024" selection-start-column="0" selection-end-line="1024" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />

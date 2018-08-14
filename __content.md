@@ -5,42 +5,11 @@ In this chapter, we will cover:
 1. UI Slider to change game quality settings
 2. Pausing the game
 3. Implementing slow motion
-
 4. Gizmo to show currently selected object in Scene panel
 5. Editor snap-to grid drawn by Gizmo
-
 6. Creating a VR project
 7. Adding 360-=degree videos to a VR project
 8. Working with VR content inside a VR environment - the XR Editor 
-
-
-
-
-6. Optimization with the Unity Profiler
-6. Particles
-7. Recording in Unity 
-   
-1. Creating a simple VR scene
-1. Deploying a simple VR scene to a standalone executable
-1. Using a Windows batch file to force VR mode when running an executable
-1. Balancing Sharpness and Performance by changing the Render Scale 
-1. User Interaction with the VREyeCaster
-1. Gesture input with VRInput events
-1. Object interaction with the VRInteractiveItem component
-1. Gaze selection with a visible reticle
-1. Displaying a clock to explore Spatial UI 
-1. Free anti-aliasing on text with a Canvas Scaler on a Worldspace Canvas
-1. Fading when changing positions (to avoid VR Sickness nausea)
-1. Optimizing for VR applications
-
-
-VR
-
-
-Unity Analytics -- data from games
-- heat maps from VR
-
-
 
 
 <!-- ******************************* -->
@@ -49,7 +18,8 @@ Unity Analytics -- data from games
 # Introduction
 
 There are too many features in Unity 2018 to all be covered in an single book. In this chapter we present a set of 
-recipes illustrating VR game development in Unity, plus a range of additional Unity features.
+recipes illustrating VR game development in Unity, plus a range of additional Unity features that we wanted to 
+include.
 
 # The Big Picture
 
@@ -57,13 +27,9 @@ Virtual Reality is about presenting to the player an immersive audio-visual expe
 lose them selves in exploring and interacting with the game world that has been created.
 
 From one point of view, VR simply requires 2 cameras, to generate the images for each eye, to give that realistic 3D 
-effect. 
+effect. But effective VR needs content, UI controls and tools to help create them.
 
-
-xxxx
-
-xxxx
-
+In this chapter we explore recipes that work with 360-degree videos, and the Unity's XR Editor toolset.
 
 ## Gizmos
 
@@ -77,45 +43,8 @@ Gizmos are not drawn through Editor scripts, but as part of Monobehavious - i.e.
 
 Gizmo graphical drawing makes it simple to draw lines, cubes, spheres. Also more complex shapes with meshes, and also displaying 2D image icons (located in the Assets/Gizmos folder).
 
-Several recipes in this chapter illustrate how Gizmos can be useful. Often new GameObjects created from Editor Extensions will have helpful Gizmos assocaite with them.
-
-
-
-
-
-Gizmos Unity manual entry:
-
-    - https://docs.unity3d.com/Manual/GizmosMenu.html
-
-
-
-
-Introduction
-The first three recipes in this chapter provide some ideas for adding some extra features  to your game (pausing, slow motion, and securing online games). The next two recipes  then present ways to manage complexity in your games through managing states and  their transitions.
-The rest of the recipes in this chapter provide examples of how to investigate and improve  the efficiency and performance of your game. Each of these optimization recipes begins by stating an optimization principle that it embodies.
-The big picture
-Before getting on with the recipes, let's step back and think about the different parts of Unity games and how their construction and runtime behavior can impact on game performance.
-Games are made up of several different kinds of components:
-Audio assets
-2D and 3D graphical assets
-Text and other file assets
-Scripts
-When a game is running, there are many competing processing requirements for your CPU and GPU, including:
-Audio processing
-Script processing
-2D physics processing
-3D physics processing
-Graphical rendering
-GPU processing
-One way to reduce the complexity of graphical computations and to improve frame rates is to use simpler models whenever possible—this is the reduction of the Level Of Detail (LOD). The general strategy is to identify situations where a simpler model will not degrade the user's experience. Typically, situations include where a model is only taking up a small part of the screen (so less detail in the model will not change what the user sees), when objects are moving very fast across the screen (so the user is unlikely to have time to notice less detail), or where we are sure the users' visual focus is elsewhere (for example, in a car racing game, the user is not looking at the quality of the trees but on the road ahead). We provide a LOD recipe, Improving performance with LOD groups, in this chapter.
-Unity's draw call batching may actually be more efficient than you or your team's 3D modelers are at reducing the triangle/vertex geometry. So, it may be that by manually simplifying a 3D model, you have removed Unity's opportunity to apply its highly effective vertex reduction algorithms; then, the geometric complexity may be larger for a small model than for a larger model, and so a smaller model may lead to a lower game performance! One recipe presents advice collected from several sources and the location of tools to assist in different strategies to try to reduce draw calls and improve graphical performance.
-We will present several recipes allowing you to analyze actual processing times and frame rates, so that you can collect data to confirm whether your design decisions are having the desired efficiency improvements.
-"You have a limited CPU budget and you have to live with it"
-                                                                                         Joachim Ante, Unite-07
-At the end of the day, the best balance of heuristic strategies for your particular game project can only be discovered by an investment of time and hard work, and some form of profiling investigation. Certain strategies (such as caching to reduce component reflection lookups) should perhaps be standard practice in all projects, while other strategies may require tweaking for each unique game and level, to find which approaches work effectively to improve efficiency, frame rates, and, most importantly, the user experience when playing the game.
-"Premature Optimization is the root of all evil"
-Donald Knuth, "Structured Programming With Go To Statements". Computing Surveys, Vol 6, No 4, December 1974
-Perhaps, the core strategy to take away from this chapter is that there are many parts of a game that are candidates for possible optimization, and you should drive the actual optimizations you finally implement for a particular game based on the evidence you gain  by profiling its performance.
+Several recipes in this chapter illustrate how Gizmos can be useful. Often new GameObjects created from Editor 
+Extensions will have helpful Gizmos associated with them.
 
 
 <!-- ******************************* -->
@@ -129,7 +58,6 @@ Perhaps, the core strategy to take away from this chapter is that there are many
 In this recipe we show how the player can control the quality settings by providing UI Slider and reading the array of possible settings.
 
 ![Insert Image B08775_16_02.png](./16_figures/B08775_16_02.png)
-
 
 
 <!-- ******************************* -->
@@ -520,16 +448,6 @@ Motion Blur is an image effect frequently identified with slow motion. Once atta
 Max Payne famously used a strong, heavy heartbeat sound as sonic ambience. You could also try lowering the sound effects volume to convey the character focus when in slow motion. Plus, using audio filters on the camera could be an interesting option.
 
 
-
-
-<!-- ******************************** -->
-<!-- ******************************** -->
-
-## How it works...
-
-xx
-
-
 <!-- ******************************* -->
 <!-- ******************************* -->
 <!-- ******** new recipe ********** -->
@@ -590,7 +508,9 @@ When an object is selected in Scene, if it contains a scripted component that ha
 then that method is invoked. Our method draws 3, concentric wireframe spheres in three different colors around the 
 selected object.
 
+Gizmos Unity manual entry:
 
+    - https://docs.unity3d.com/Manual/GizmosMenu.html
 
 <!-- ******************************* -->
 <!-- ******************************* -->
@@ -1102,7 +1022,7 @@ This works for 3D objects with inverted normals - e.g. a hollow 3D Sphere that y
 
 An exciting project from Unity is the XR-Editor, which is a VR environment that allows you to edit a Scene in VR. The project provides great examples of VR UI elements, including 3D menus and laser pointer selectors etc. It allows you to see Console reports in the environment and interact with the Hierarchy of GameObjects.
 
-    ![Insert Image B08775_16_30.png](./16_figures/B08775_16_30.png)
+![Insert Image B08775_16_30.png](./16_figures/B08775_16_30.png)
 
 In this recipe we set up the XR-Editor for use in a Unity project.
 
