@@ -10,8 +10,8 @@ In this chapter, we will cover:
 5. Editor snap-to grid drawn by Gizmo
 
 6. Creating a VR project
-7. Adding 360 videos to a VR project
-8. Creating a VR project
+7. Adding 360-=degree videos to a VR project
+8. Working with VR content inside a VR environment - the XR Editor 
 
 
 
@@ -871,7 +871,7 @@ steps to setup your Vive headset ready for Unity game development :
 
 ## How to do it... 
 
-To create a basic VR project for Vive in Unity, follow these steps:
+To create a basic VR Unity project, follow these steps:
 
 1. Start new 3D Project.
 
@@ -902,7 +902,7 @@ space representing your room setup (our examples show the rectangular-based spac
 
     ![Insert Image B08775_16_19.png](./16_figures/B08775_16_19.png)
 
-1. Run the Scene. You should see 3D representations of the position, and trigger settings etc. of your hard controllers in the virual space.
+1. Run the Scene, put on your VR headset, and ick up your hand controllers. You should see 3D representations of the position, and trigger settings etc. of your hard controllers in the virtual space.
 
 1. Import/Create 3D Objects in your Scene - for example add a 3D Cube to the Scene, inside the room space of the CameraRig. 
   
@@ -926,6 +926,7 @@ This package contains prefabs for the headset and handsets etc. to work in the s
 
 You created a Unity project with the Vive prefabs. You added a 3D Cube to the Scene, and interacted with it, by adding colliders to the Cube and a hand controller GameObject.
 
+NOTE: This was tested with Unity 2017.4.9 LTS, since it wasn't fully working with a 2018 version at the time of writing.
 
 <!-- ******************************** -->
 <!-- ******************************** -->
@@ -994,79 +995,82 @@ If using new lightweight rendering pipelines - need to choose Single Pass when s
 <!-- ******************************* -->
 <!-- ******************************* -->
 
-# Adding 360 videos to a VR project
+# Adding 360-degree videos to a VR project
+
+Google Earth VR is great fun:
+
+![Insert Image B08775_16_31.png](./16_figures/B08775_16_31.png)
+
+Affordable 360-degree cameras mean that it's easy to create your own, or find free online 360-degree image and video clips. In this recipe we'll learn how to add a 360-degree video clip as a skybox in a VR project. Also how the 360-degree video clips can be played on the surface of 3D objects, including the inside of a sphere - a bit like Google Earth VR mode when you raise the sphere to your head to view its 360-degree image contents.
 
 
-360 video example image: 32
-
-
-Two formats for 360 video - we'll use the polar coordiantes one (not 2 spheres) - easier to work with in UNity 
-(converted automatically by Phne )
-
-
-
-
-
-LG 360 - records 2 spheres
-phone converts it to polar coordinates
-
-both .MPG
-
-==
+![Insert Image B08775_16_32.png](./16_figures/B08775_16_32.png)
 
 
 
-getting ready - start a new VR project
-(or copy previous VR setup)
+<!-- ******************************* -->
+<!-- ******************************* -->
 
-1. Import your video file - Snowboarding_Polar 
+## Getting ready
 
+For this recipe we have provided a short Snowboarding_Polar.mp4 in the 16_07 folder. This project builds on the previous one (i.e. a basic VR project), so make a copy of that and work on the copy.
+
+NOTE: Special thanks to Kris Szczurowski for permission to use his snowboarding video, and all the help with these VR project recipes.
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+## How to do it... 
+
+To add 360 videos to a VR project, follow these steps:
+
+1. Import your 360-degree polar format video clip into your Unity project (e.g. Snowboarding_Polar.mp4).
 
 1. Select the video asset in the Project panel, and in the Inspector make a note of its resolution (we'll need those 
-later)
-(e.g. 1250 x 128)
+later) (e.g. 2560 x 1280):
 
-1. Create a new empty GameObject named video-player, choose menu: Create | Empty
+    ![Insert Image B08775_16_34.png](./16_figures/B08775_16_34.png)
 
-1. Add to video-player a component Video Player
+1. Create a new empty GameObject named video-player, choose menu: Create | Empty.
 
-1. Drag in video asset file to source
+1. Select video-player in the Hierarchy, and in the Inspector add a component Video Player component, by choosing: Add Component | Video | Video Player.
 
-1. Create new Render Texture asset file
+1. From the Project panel drag your video asset file, e.g. Snowboarding_Polar, into the Video Clip property of the Video Player component.
 
-1. Set the Resolution of the Render Texture to match the video asset resolution
+1. Create new Render Texture asset file named VideoRenderTexture, by choosing menu: Create | Render Texture.
+
+1. Set the Resolution of the VideoRenderTexture to match the video asset resolution. e.g. 2560 x 1280:
 
     ![Insert Image B08775_16_23.png](./16_figures/B08775_16_23.png)
 
-1. For video player component set target texture to be the render texture
+1. In the Hierarchy select GameObject video-player, and for the Video Player component set target texture to be VideoRenderTexture.
 
-1. Create a new Material named video_m, choose menu: Create | Material
+1. Create a new Material named video_m, by choosing menu: Create | Material.
 
-1. With video_m selection change the shader to Skybox | Panoramic
+1. With video_m selected in the Project panel, change its shader to Skybox | Panoramic.
 
-1. Open the Lighting | Settings panel
-
-    - set Skybox material to video_m
+    ![Insert Image B08775_16_35.png](./16_figures/B08775_16_35.png)
     
+1. In the Inspector, for the Spherical HRD property, click the Select button and choose Texture VideoRenderTexture.    
 
-1. Play the Scene
+    ![Insert Image B08775_16_37.png](./16_figures/B08775_16_37.png)
 
+1. Open the Lighting Settings panel, choose menu: Window | Rendering | Lighting Settings. In the Inspector set the Skybox material to video_m.
+    
+    ![Insert Image B08775_16_36.png](./16_figures/B08775_16_36.png)
 
-=======
+1. Play the Scene, put on you VR headset, and you should see the 360-degree video playing all around you.
 
+<!-- ******************************** -->
+<!-- ******************************** -->
 
-Game Idea
+## How it works...
 
-interactive objects - location data to accompany the video 
+You created a GameObject with a Video Player component, and make it play your 360-degree video. You made this component render to a Render Texture of the same dimensions as your video.
 
+You created a skybox-panomaric Materials, and selected your Render Texture as the Texture for this Material. You then set this Material as the Skybox for the Lighting Settings.
 
-
-
-
-
-
-
-
+NOTE: This was tested with Unity 2017.4.9 LTS, since it wasn't fully working with a 2018 version at the time of writing.
 
 <!-- ******************************** -->
 <!-- ******************************** -->
@@ -1075,31 +1079,17 @@ interactive objects - location data to accompany the video
 
 Here are some suggestions for taking this recipe further.
 
-
-
 <!-- ******************************** -->
 <!-- ******************************** -->
 
-## Play 360 Video on outside of a 3D Object
+## Play 360-degree Video on surface of a 3D Object
 
-Add a Video Player component to the 3D GameObject, and drag the video clip to the clip property in the Inspector
-and away you go
-
-
-- component - Mesh Renderer - Materials (click little triangle )
+To play 360-degree videos on the surface of a 3D object, do the above steps, but do not set the Skybox to video_m. 
+Instead set the Material of the Mesh Rendered component of your 3D object to video_m:
 
     ![Insert Image B08775_16_24.png](./16_figures/B08775_16_24.png)
 
-
-
-
-
-
-<!-- ******************************** -->
-<!-- ******************************** -->
-
-## Twin-Spherical video format
-
+This works for 3D objects with inverted normals - e.g. a hollow 3D Sphere that you can look at from the inside.
 
 
 <!-- ******************************* -->
@@ -1108,56 +1098,71 @@ and away you go
 <!-- ******************************* -->
 <!-- ******************************* -->
 
-# XR Editor 
+# Working with VR content inside a VR environment - the XR Editor 
 
-tested with 2017.4.9 LTS - not sure works with 2018 yet ...
+An exciting project from Unity is the XR-Editor, which is a VR environment that allows you to edit a Scene in VR. The project provides great examples of VR UI elements, including 3D menus and laser pointer selectors etc. It allows you to see Console reports in the environment and interact with the Hierarchy of GameObjects.
+
+    ![Insert Image B08775_16_30.png](./16_figures/B08775_16_30.png)
+
+In this recipe we set up the XR-Editor for use in a Unity project.
 
 ## Getting ready
 
-Start with the VR Basic project created in recipe: Create a basic VR project for Vive in Unity
-
-
+Start this recipe with a copy of the Basic VR project created in the recipe before the previous one.
 
 # How to do it ...
 
-
-1. Install the TextMeshPro package, choosing menu: Window | Package Manager.
+1. Install the TextMeshPro package, choosing menu: Window | Package Manager, and selecting Text Mesh Pro.
 
 1. Download the Editor XR package from the link on the Unity blog page
+    
+    - http://rebrand.ly/EditorVR-package
+    
+    - https://blogs.unity3d.com/2016/12/15/editorvr-experimental-build-available-today/
 
-- http://rebrand.ly/EditorVR-package
-
-- https://blogs.unity3d.com/2016/12/15/editorvr-experimental-build-available-today/
-
-1. Import the EditorXR-package package into a new 3D proejct
+1. Import the EditorXR-package package into your project.
 
 1. Agree to the prompt on screen about patching the Input Manager settings:
 
     ![Insert Image B08775_16_25.png](./16_figures/B08775_16_25.png)
 
-1. Should have a new item on the Window Menu, Window | EditorXR. Choose this menu item, and a new, floating 
-application window should appear
+1. Should have a new item on the Window Menu, Window | EditorXR.
 
     ![Insert Image B08775_16_26.png](./16_figures/B08775_16_26.png)
 
-1. Put on your VR headset and away you go.
+1. A new, floating EditorVFR application window should appear:
 
+    ![Insert Image B08775_16_26.png](./16_figures/B08775_16_27.png)
 
-    ![Insert Image B08775_16_27.png](./16_figures/B08775_16_27.png)
+1. Put on your VR headset and away you go. Do NOT run the Scene - EditorXR works at Design-Time, not Run-Time, so do NOT play the Scene.
+
+1. You display the main menu by directing the laser pointer of one virutal hand controller ontothe menu bar on the other hand conrtoller.
 
     ![Insert Image B08775_16_28.png](./16_figures/B08775_16_28.png)
 
+1. You'll then get a cube-like, multi-sided, rotatable main menu, from which you can choose items with the laser 
+pointer. For example on the Workspaces side of the menu object you can display the Console or Hierarchy panels.
+
+    ![Insert Image B08775_16_38.png](./16_figures/B08775_16_38.png)
+
+1. You can choose the Primatives menu, from which to create new 3D objects.
+
     ![Insert Image B08775_16_29.png](./16_figures/B08775_16_29.png)
 
+1. With a GameObject selected, a wheel-menu offers actions, such as deleting, or selecting the parent and so on.
 
-NOTE: EditorXR works at Design-Time, not Run-Time, so do NOT play the Scene - it only works when editing a Scene.
+    ![Insert Image B08775_16_39.png](./16_figures/B08775_16_39.png)
 
+<!-- ******************************** -->
+<!-- ******************************** -->
 
+## How it works...
 
+In this recipe you learned how to install and start interacting with Unity's Editor-XR. 
 
+NOTE: This was tested with Unity 2017.4.9 LTS, since it wasn't fully working with a 2018 version at the time of writing.
 
-
-Learn more about Editor VR:
+Learn more about Editor VR at the Unity blog:
 
 - https://blogs.unity3d.com/2016/12/15/editorvr-experimental-build-available-today/
 
