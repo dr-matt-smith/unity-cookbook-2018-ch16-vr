@@ -9,7 +9,14 @@ In this chapter, we will cover:
 4. Gizmo to show currently selected object in Scene panel
 5. Editor snap-to grid drawn by Gizmo
 
-5. Optimization with the Unity Profiler
+6. Creating a VR project
+7. Adding 360 videos to a VR project
+8. Creating a VR project
+
+
+
+
+6. Optimization with the Unity Profiler
 6. Particles
 7. Recording in Unity 
    
@@ -25,6 +32,15 @@ In this chapter, we will cover:
 1. Free anti-aliasing on text with a Canvas Scaler on a Worldspace Canvas
 1. Fading when changing positions (to avoid VR Sickness nausea)
 1. Optimizing for VR applications
+
+
+VR
+
+
+Unity Analytics -- data from games
+- heat maps from VR
+
+
 
 
 <!-- ******************************* -->
@@ -792,4 +808,357 @@ Script-class GridGizmo draws a 2D grid based on public properties for grid size,
 Script-class SnapToGridGizmo includes Editor attribute `[ExecuteInEditMode]`, so that it will received Update() messages when its properties are changed at Design-Time in the Editor. Each time Update() is invoked, it calls method SnapPositionToGrid(...) in its parent GridGizmo instance-object, so that its position is snapped based on the current settings of the grid. To ensure this logic and code is not compiled into any final Build of the game, the contents of Update() are wrapped in an `#if UNITY_EDITOR` compiler test. Such content is removed before a build is compiled for the final game.
 
 Script-class EditorGridGizmo is a custom Editor Inspector component. This allows for both control of which properties are displayed in the Inspector, how they are displayed, and it allows actions to be performed when any values are changed. So, for example, after chanfges have been saved statement `SceneView.RepaintAll()` ensures the grid is redisplayed, since it results int an OnDrawGizmos() message being sent.
+
+
+
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+<!-- ******** new recipe ********** -->
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+# Creating a VR project
+
+In this recipe we go through the steps to setup a basic VR Scene in Unity using the Vive VR headset on a Windows 
+computer.
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+## Getting ready
+
+You need Steam VR with the Standing Only or Room-scale setup. If you have not done so yet, then follow these 
+steps to setup your Vive headset ready for Unity game development :
+
+1. Install Steam.
+
+1. Install Steam VR.
+
+1. Plug in your Vive headset.
+
+1. From Steam application window run Steam VR (click VR at top right of Steam app window).
+
+    ![Insert Image B08775_16_33.png](./16_figures/B08775_16_33.png)
+
+1. Steam VR should then run, and choose the Run Room Setup menu item.
+
+    ![Insert Image B08775_16_20.png](./16_figures/B08775_16_20.png)
+
+1. Position your Light Houses to cover the space in the room tht you want to use.
+
+1. From Room Setup screen, choose your room setup: Standing Only or Room-Scale:
+
+    - Standing Only:
+    
+        - use headset to set center
+        
+        - use headset to locate floor
+    
+    - Room-Scale:
+    
+        - position your Light Houses  to cover the space you want to use
+        
+        - calibrate floor - putting hand controllers on the floor
+        
+        - walk around room, using hand controllers with trigger to trace the space you can safely move around
+        
+        
+1. You can now explore Steam VR Home.
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+## How to do it... 
+
+To create a basic VR project for Vive in Unity, follow these steps:
+
+1. Start new 3D Project.
+
+NOTE: Either work with a new 3D Unity project, or make a backup of any project to which you are about to add VR features, since you will be adding a package that makes changes to many settings, and it could mess up settings in an existing project.
+
+1. Delete the Main Camera from the Scene.
+
+1. Display the Unity Player settings in the Inspector, by choosing menu: Edit | Project Settings | Player.
+
+1. Check the Virtual Reality Support option near the bottom of Inspector:
+
+    ![Insert Image B08775_16_14.png](./16_figures/B08775_16_14.png)
+
+1. Ensure you are logged into your Unity Account (before accessing the Asset Store)
+
+1. Visit the Asset Store search for Steam VR from Valve Corporation
+
+    ![Insert Image B08775_16_17.png](./16_figures/B08775_16_17.png)
+
+1. Download and Import the package (you'll be warned about having made a backup before importing ...).
+
+1. Choose your preferred options from any popup about builds:
+
+     ![Insert Image B08775_16_18.png](./16_figures/B08775_16_18.png)
+
+1. Drag into the Scene a clone of the [CameraRig] prefab from folder: Project | SteamVR | Prefabs. You'll see a 3D 
+space representing your room setup (our examples show the rectangular-based space from Standing only room setup).
+
+    ![Insert Image B08775_16_19.png](./16_figures/B08775_16_19.png)
+
+1. Run the Scene. You should see 3D representations of the position, and trigger settings etc. of your hard controllers in the virual space.
+
+1. Import/Create 3D Objects in your Scene - for example add a 3D Cube to the Scene, inside the room space of the CameraRig. 
+  
+1. Run the Scene, and try moving a virtual hand controller to collide with your 3D Cube.
+  
+     ![Insert Image B08775_16_21.png](./16_figures/B08775_16_21.png)
+
+1. Test physics - add a Rigid Body to the Cube (turn off gravity), add/make smaller the Box Collider to the Right controller.
+
+1. Run the Scene - you should be able to push the Cube with teh virtual hand controller.
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## How it works...
+
+You've learnt to setup the Vive and locate and install the Steam VR package.
+
+This package contains prefabs for the headset and handsets etc. to work in the standing/room space you setup.
+
+You created a Unity project with the Vive prefabs. You added a 3D Cube to the Scene, and interacted with it, by adding colliders to the Cube and a hand controller GameObject.
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## There's more...
+
+Here are some suggestions for taking this recipe further.
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## Exploring free VR/XR samples/tutorials
+
+Some good sources of free sample VR projects to explore include:
+
+    - Unity Technologies VR Samples:
+    
+        - https://assetstore.unity.com/packages/essentials/tutorial-projects/vr-samples-51519
+        
+![Insert Image B08775_16_90.png](./16_figures/B08775_16_90.png)
+
+    - a good tutorial on Vive and Unity from Ray Wenderlick
+
+        - https://www.raywenderlich.com/792-htc-vive-tutorial-for-unity
+        
+    - Valve Lab Renderer on the Unity Asset store:
+    
+        - https://assetstore.unity.com/packages/tools/the-lab-renderer-63141
+    
+    - Vive input utility on the Unity Asset store:
+        
+        - https://assetstore.unity.com/packages/tools/integration/vive-input-utility-64219
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## Setup with Occulus Rift
+
+The Occulus Rift setup is similar to that with teh Vive, although it actually integrates a little better with Unity. You need to :
+
+1. Install the Occulus runtime
+    
+1. Setup for room / standing - for the Infrared Cameras
+
+1. There is no need download any package, and no need to remove the Main Camera.
+
+Learn more at the Occulus Rift Unity documentation site:
+
+    - https://developer.oculus.com/documentation/unity/latest/concepts/book-unity-gsg/
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## Use Single Pass if working with Lightweight Rendering Pipeline
+
+If using new lightweight rendering pipelines - need to choose Single Pass when setting up XR in the settings, having chosen menu: Edit | Project Settings | Player.
+
+![Insert Image B08775_16_15.png](./16_figures/B08775_16_15.png)
+
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+<!-- ******** new recipe ********** -->
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+# Adding 360 videos to a VR project
+
+
+360 video example image: 32
+
+
+Two formats for 360 video - we'll use the polar coordiantes one (not 2 spheres) - easier to work with in UNity 
+(converted automatically by Phne )
+
+
+
+
+
+LG 360 - records 2 spheres
+phone converts it to polar coordinates
+
+both .MPG
+
+==
+
+
+
+getting ready - start a new VR project
+(or copy previous VR setup)
+
+1. Import your video file - Snowboarding_Polar 
+
+
+1. Select the video asset in the Project panel, and in the Inspector make a note of its resolution (we'll need those 
+later)
+(e.g. 1250 x 128)
+
+1. Create a new empty GameObject named video-player, choose menu: Create | Empty
+
+1. Add to video-player a component Video Player
+
+1. Drag in video asset file to source
+
+1. Create new Render Texture asset file
+
+1. Set the Resolution of the Render Texture to match the video asset resolution
+
+    ![Insert Image B08775_16_23.png](./16_figures/B08775_16_23.png)
+
+1. For video player component set target texture to be the render texture
+
+1. Create a new Material named video_m, choose menu: Create | Material
+
+1. With video_m selection change the shader to Skybox | Panoramic
+
+1. Open the Lighting | Settings panel
+
+    - set Skybox material to video_m
+    
+
+1. Play the Scene
+
+
+=======
+
+
+Game Idea
+
+interactive objects - location data to accompany the video 
+
+
+
+
+
+
+
+
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## There's more...
+
+Here are some suggestions for taking this recipe further.
+
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## Play 360 Video on outside of a 3D Object
+
+Add a Video Player component to the 3D GameObject, and drag the video clip to the clip property in the Inspector
+and away you go
+
+
+- component - Mesh Renderer - Materials (click little triangle )
+
+    ![Insert Image B08775_16_24.png](./16_figures/B08775_16_24.png)
+
+
+
+
+
+
+<!-- ******************************** -->
+<!-- ******************************** -->
+
+## Twin-Spherical video format
+
+
+
+<!-- ******************************* -->
+<!-- ******************************* -->
+<!-- ******** new recipe ********** -->
+<!-- ******************************* -->
+<!-- ******************************* -->
+
+# XR Editor 
+
+tested with 2017.4.9 LTS - not sure works with 2018 yet ...
+
+## Getting ready
+
+Start with the VR Basic project created in recipe: Create a basic VR project for Vive in Unity
+
+
+
+# How to do it ...
+
+
+1. Install the TextMeshPro package, choosing menu: Window | Package Manager.
+
+1. Download the Editor XR package from the link on the Unity blog page
+
+- http://rebrand.ly/EditorVR-package
+
+- https://blogs.unity3d.com/2016/12/15/editorvr-experimental-build-available-today/
+
+1. Import the EditorXR-package package into a new 3D proejct
+
+1. Agree to the prompt on screen about patching the Input Manager settings:
+
+    ![Insert Image B08775_16_25.png](./16_figures/B08775_16_25.png)
+
+1. Should have a new item on the Window Menu, Window | EditorXR. Choose this menu item, and a new, floating 
+application window should appear
+
+    ![Insert Image B08775_16_26.png](./16_figures/B08775_16_26.png)
+
+1. Put on your VR headset and away you go.
+
+
+    ![Insert Image B08775_16_27.png](./16_figures/B08775_16_27.png)
+
+    ![Insert Image B08775_16_28.png](./16_figures/B08775_16_28.png)
+
+    ![Insert Image B08775_16_29.png](./16_figures/B08775_16_29.png)
+
+
+NOTE: EditorXR works at Design-Time, not Run-Time, so do NOT play the Scene - it only works when editing a Scene.
+
+
+
+
+
+
+Learn more about Editor VR:
+
+- https://blogs.unity3d.com/2016/12/15/editorvr-experimental-build-available-today/
+
 

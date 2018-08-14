@@ -1,0 +1,57 @@
+---- 1 ----
+introduction
+
+https://unity3d.com/learn/tutorials/topics/virtual-reality/vr-overview
+
+The Unity SAMPLES Asset Store
+https://assetstore.unity.com/packages/essentials/tutorial-projects/vr-samples-51519
+
+
+--- 2 ----
+
+Occulus Rift DK2
+Developmet Kit 2??
+
+Unity VR tutorial - talking about DK2
+https://unity3d.com/learn/tutorials/topics/xr/getting-started-vr-development
+
+-----
+
+here are links to things I'd put in my candidate list for topics for the VR part of the chapter
+- if you get a chance to try a few out let me know what you think ....
+
+Editor VR
+- https://blogs.unity3d.com/2016/12/15/editorvr-experimental-build-available-today/
+
+Unity ARKit
+https://www.youtube.com/watch?v=Qcwn5m4uTUA&utm_content=buffer03dc9&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer
+
+Unity VR optimization
+https://unity3d.com/learn/tutorials/topics/virtual-reality/optimisation-vr-unity?playlist=22946
+
+Types of interfaces for VR
+https://unity3d.com/learn/tutorials/topics/virtual-reality/user-interfaces-vr
+
+
+VR demos
+https://risonsimon.com/days-in-vr/
+
+
+Unity VR - foz / gaze based UI
+https://tutorialsforvr.com/tutorials/
+
+
+Vive for Unity tutorial
+https://www.raywenderlich.com/792-htc-vive-tutorial-for-unity
+
+
+Editor XR in VR for Unity
+https://github.com/Unity-Technologies/EditorXR
+
+https://docs.google.com/document/d/1xWunGC3NJoDRBBz44gxpMUAh3SmedtNK12LqACyy2L0/edit
+
+360 video heatmaps
+https://github.com/Unity-Technologies/360-Video-Heatmaps
+
+
+regards
